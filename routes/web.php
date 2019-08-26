@@ -25,7 +25,7 @@ Route::get('crash/view/{id}', 'CrashController@view');
 
 Route::get('crash/view', 'CrashController@view_all');
 
-Route::get('thing/crash_add/{id_thing}', 'CrashController@add');
+Route::post('thing/crash_add/{id_thing}', 'CrashController@add');
 
 Route::get('thing/add', 'ThingController@add');
 
@@ -52,3 +52,5 @@ Route::get('user/delete/{id}', 'UserController@delete');
 Route::get('user/view/{id}', 'UserController@view');
 
 Route::get('user/view', 'UserController@view_all');
+
+Route::get('form/{id}', 'ThingController@form');

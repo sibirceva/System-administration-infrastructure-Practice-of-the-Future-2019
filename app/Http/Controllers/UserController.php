@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class UserController extends Controller
 {
     public function view_all()
     {
-        echo 'Посмотреть всех пользователей';
+        $user = new User;
+        $user->login = 'admin';
+        $user->save();
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            echo $user->login;
+            echo '<br>';
+        }
     }
 
     public function view($id)
@@ -23,6 +34,13 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        echo 'Удалить пользователя с номером '.$id;
+        User::destroy($id);
+        echo 'Пользователь с номером '.$id.' удалён! <br> Список существующих пользователей: <br>';
+        $users = User::all();
+
+        foreach ($users as $user) {
+            echo $user->id;
+            echo '<br>';
+        }
     }
 }

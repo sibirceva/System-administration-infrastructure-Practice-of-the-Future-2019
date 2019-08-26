@@ -1,0 +1,53 @@
+﻿<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<head>
+ 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+	<style type="text/css">
+
+	#header, #content { position: absolute; }
+	#header, #content { overflow: auto; padding: 10px; }
+
+	#content {
+		top: 20px;
+		left: 20px;
+		bottom: 0; 
+		right: 0;
+
+	}
+
+	</style>
+ 
+</head>
+
+<body>
+
+	<form action="check.php" method="POST">
+	<blockquote class="blockquote">
+
+	<div id="content">
+	<h4 class="display-4"><em>ИСПРАВЛЕНО</em></h4>
+	<INPUT TYPE="checkbox" NAME="group[0]" VALUE="ПРОБЛЕМА" >  ТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТ
+	<BR>
+	<INPUT TYPE="checkbox" NAME="group[1]" VALUE="ПРОБЛЕМА">  ТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТ
+	<BR>
+	<INPUT TYPE="checkbox" NAME="group[1]" VALUE="ПРОБЛЕМА">  ТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТТЕКСТ
+	<BR>
+	Введите ваше имя:
+	<BR>
+	<INPUT TYPE="text" NAME="ФИО" SIZE=30>
+	<BR>
+<button type="submit" class="btn btn-primary">
+<span class="rounded-pill">Удалить</span> 
+</button>
+</form>
+</blockquote>
+</div>
+</body>
+</html>
