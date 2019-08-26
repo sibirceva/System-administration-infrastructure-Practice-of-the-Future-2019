@@ -22,7 +22,10 @@ class ThingController extends Controller
 
     public function print_poster($id)
     {
-        echo 'Печать плаката для вещи с номером '.$id;
+        //echo 'Печать плаката для вещи с номером '.$id;
+        $thing = Thing::find($id);
+        $type = Type::find($thing->type);
+        require_once('tfpdf\report.php');
     }
 
     public function edit($id)

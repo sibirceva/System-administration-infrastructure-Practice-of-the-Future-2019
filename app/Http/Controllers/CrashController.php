@@ -37,14 +37,14 @@ class CrashController extends Controller
         $crash->id_of_thing = $id_thing;
         $thing = Thing::find($id_thing);
         $type = Type::find($thing->type);
-        $crashes = explode(';',$type->often_crashes);
-        for ($i = 0; $i < count($crashes); $i++) {
+        $crashes = explode(';', $type->often_crashes);
+        for ($i = 0; $i < count($crashes); $i++) { //проверка чекбоксов частых поломок
             if ($_POST[$i] == 'on') {
                 $crash->description .= $crashes[$i];
                 if ($i+1 != count($crashes)) $crash->description .= ';';
             }
         }
-        if ($_POST[count($crashes)] == 'on')
+        if ($_POST[count($crashes)] == 'on') //проверка чекбокса "другое"
         {
             $crash->description .= ';';
             $crash->description .= $_POST['problem'];
@@ -68,6 +68,7 @@ class CrashController extends Controller
             </style>
         </head>
         <body>
+            <br> <br>
             <h4 class="display-4"><em>Данные успешно отправлены. Спасибо!</em></h4>
         </body></html>';
     }
