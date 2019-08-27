@@ -15,12 +15,21 @@ class CrashController extends Controller
 {
     public function close($id)
     {
-        echo 'Закрыть поломку с номером '.$id;
-        
+        $crash = Crash::findOrFail($id);
+        if ($crash->who_closed == NULL)
+        {
+            $crash->who_closed = 1;
+            $crash->when_closed = date('Y-m-d H:i:s');
+            $crash->save();
+            echo '<h1>Поломка '.$id.' успешно закрыта.</h1>';
+        }
+        else echo '<h1>Поломка уже закрыта!</h1>';
+        echo '<a href="/crash/view">Вернуться к списку поломок</a>';
     }
 
     public function delete($id)
     {
+        Crash::findOrFail($id);
         echo 'Удалить поломку с номером '.$id;
     }
 
@@ -39,6 +48,7 @@ class CrashController extends Controller
         </head>
         
         <body>
+            <p>[<a href="/user/view">Вернуться в личный кабинет</a>]</p>
             <table class="table">
                 <caption><b>Список поломок</b></caption>
                 <tr>
@@ -57,9 +67,9 @@ class CrashController extends Controller
         {
             echo '<th scope="row">'.$crash->id.'</th>
             <td>'.Type::find(Thing::find($crash->id_of_thing)->type)->name.'<br>'.Thing::find($crash->id_of_thing)->location.'</td>
-			<td> - '.str_replace(';','<br> - ',$crash->description).'</td>
+			<td> - '.str_replace('; ','<br> - ',$crash->description).'</td>
 			<td>'.$crash->time.'</td>
-			<td>'.$crash->who_closed.'</td>
+			<td>'.User::find($crash->who_closed)->login.'</td>
 			<td>'.$crash->when_closed.'</td>
             <td><a href="close/'.$crash->id.'">Закрыть</a> | <a href="view/'.$crash->id.'">Просмотреть</a> | <a href="delete/'.$crash->id.'">Удалить</a></td>
             </tr>';
@@ -80,14 +90,14 @@ class CrashController extends Controller
         $crash->id_of_thing = $id_thing;
         $thing = Thing::find($id_thing);
         $type = Type::find($thing->type);
-        $crashes = explode(';', $type->often_crashes);
+        $crashes = explode('; ', $type->often_crashes);
         for ($i = 0; $i < count($_POST)-1; $i++) { //проверка чекбоксов частых поломок
             $crash->description .= $crashes[$i];
-            if ($i+1 != count($crashes)) $crash->description .= ';';
+            if ($i+1 != count($crashes)) $crash->description .= '; ';
         }
         if (count($_POST)-1 > count($crashes)) //проверка чекбокса "другое"
         {
-            $crash->description .= ';';
+            $crash->description .= '; ';
             $crash->description .= $_POST['problem'];
         }
         $crash->save();

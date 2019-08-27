@@ -14,5 +14,9 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'thing/crash_add/*',
         'form/*',
+        'thing/add',
+        'thing/new',
+        'type/add',
+        'type/new',
     ];
 }

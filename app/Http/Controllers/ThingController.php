@@ -12,7 +12,42 @@ class ThingController extends Controller
 {
     public function add()
     {
-        echo 'Добавить вещь';
+        //Форма для добавления вещи
+        echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        </head>
+        <body>
+            <h4 class="display-4"><em>&nbsp;Добавление новой вещи</p></em></h4>
+            <form action="new" method="POST">
+                <div class="form-group col-md-6">
+                    <label for="inputType">Тип вещи</label>
+                    <select id="inputType" class="form-control" name="type">
+                    <option selected>Выберите тип вещи...</option>';
+        $types = Type::all();
+        foreach ($types as $type) {
+            echo '<option>'.$type->name.'</option>';
+        }
+        echo '  </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="location">Местоположение вещи</label>
+                <input type="text" name="location" class="form-control" id="location" placeholder="Например: 4 корпус, холл 3 этажа">
+            </div>
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+            </form>';
+    }
+
+    public function add1() //добавление в БД
+    {
+        $thing = new Thing;
+        $thing->location = $_POST['location'];
+        $thing->type = Type::where('name',$_POST['type'])->first()->id;
+        $thing->save();
+        echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <br><br><p class="text-center h2">Новая вещь успешно добавлена!<br>[<a href="/user/view">Вернуться в личный кабинет</a>]</p>';
     }
 
     public function view_all()
@@ -25,7 +60,7 @@ class ThingController extends Controller
         </head>
         
         <body>
-            <p>[<a href="add">Добавить вещь</a>]</p>
+            <p>[<a href="add">Добавить вещь</a> | <a href="/user/view">Вернуться в личный кабинет</a>]</p>
             <table class="table">
                 <caption><b>Список вещей</b></caption>
                 <tr>
@@ -121,7 +156,7 @@ class ThingController extends Controller
             $i = 0;
             $thing = Thing::find($id);
             $type = Type::find($thing->type);
-            $crashes = explode(';',$type->often_crashes);
+            $crashes = explode('; ',$type->often_crashes);
             foreach ($crashes as $crash) {
                 echo '<div class="custom-control custom-checkbox mr-sm-2">
                 <input type="checkbox" class="custom-control-input" id="'.$i.'" name="'.$i.'">

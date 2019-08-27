@@ -17,27 +17,31 @@ Route::get('/', function () {
 
 //Route::get('hello','HelloController');
 
-Route::get('crash/close/{id}', 'CrashController@close');
+Route::get('crash/close/{id}', 'CrashController@close'); //закрытие поломки
 
-Route::get('crash/delete/{id}', 'CrashController@delete');
+Route::get('crash/delete/{id}', 'CrashController@delete'); //удаление поломки
 
-Route::get('crash/view/{id}', 'CrashController@view');
+Route::get('crash/view/{id}', 'CrashController@view'); //просмотреть конкретную поломку
 
-Route::get('crash/view', 'CrashController@view_all');
+Route::get('crash/view', 'CrashController@view_all'); //просмотреть все поломки
 
-Route::post('thing/crash_add/{id_thing}', 'CrashController@add');
+Route::post('thing/crash_add/{id_thing}', 'CrashController@add'); //добавление поломки в бд, отправка почтового уведомления
 
-Route::get('thing/add', 'ThingController@add');
+Route::get('thing/add', 'ThingController@add'); //форма новой вещи
 
-Route::get('thing/print_poster/{id}', 'ThingController@print_poster');
+Route::post('thing/new', 'ThingController@add1'); //добавление новой вещи в бд
 
-Route::get('thing/view', 'ThingController@view_all');
+Route::get('thing/print_poster/{id}', 'ThingController@print_poster'); //генерация плаката в пдф
 
-Route::get('thing/edit/{id}', 'ThingController@edit');
+Route::get('thing/view', 'ThingController@view_all'); //просмотреть все вещи
+
+Route::get('thing/edit/{id}', 'ThingController@edit'); //
 
 Route::get('thing/delete/{id}', 'ThingController@delete');
 
 Route::get('type/add', 'TypeController@add');
+
+Route::post('type/new', 'TypeController@add1');
 
 Route::get('type/view', 'TypeController@view_all');
 
