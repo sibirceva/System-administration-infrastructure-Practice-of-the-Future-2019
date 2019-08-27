@@ -33,7 +33,7 @@ class UserController extends Controller
             <li class="list-group-item"><a href="/thing/add">Добавить вещь</a></li>
             <li class="list-group-item"><a href="/type/add">Добавить тип вещи</a></li>
             <li class="list-group-item"><a href="/user/edit/1">Изменить адрес почты для уведомлений</a></li>
-            <li class="list-group-item"><a href="http://natribu.org/ru/#INGC0L7Qsi4g0JfQsNCy0YXQvtC3ICUgINCy0Ysg0L3QsNC20LDQu9C4INC60L3QvtC-0LrRgyAi0LLRi9GF0L7QtCIgJSAg0L3QtSDQvdCw0LbQuNC80LDQudGC0LUg0L3QsCDQstGB0LUg0LrQvdC+0L-QutC4IQ">Выход</a></li>
+            <li class="list-group-item"><a href="https://cs3-1v4.vkuseraudio.net/p21/2432be17092fd4.mp3?extra=RfsrEaMR0sZSAogOm_A_iwbtnlpwHCICifbaNMlO6imZKLatm44gebItk1SAEgRx8jWP0SBjAXwUmPFM-tCnP2ykJgSTvbUlJy0qIERlBiNPdQY2sZjT2pQ7opLHH99Mic7LGPZ0y24aRqupNU_TMlpxoeY">Выход</a></li>
         </ul>';
     }
 
