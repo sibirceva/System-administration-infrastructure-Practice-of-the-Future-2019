@@ -166,7 +166,7 @@ class ThingController extends Controller
             }
             //конец кода для частых поломок
             echo '<div class="custom-control custom-checkbox mr-sm-2">
-            <input type="checkbox" class="custom-control-input" id="'.$i.'" name="'.$i.'">
+            <input type="checkbox" class="custom-control-input" id="'.$i.'" name="other">
             <label class="custom-control-label" for="'.$i.'">Другое:</label>
           </div>
         </div>  

@@ -51,6 +51,8 @@ Route::get('type/delete/{id}', 'TypeController@delete');
 
 Route::get('user/edit/{id}', 'UserController@edit');
 
+Route::post('user/editmail/{id}', 'UserController@editmail');
+
 Route::get('user/delete/{id}', 'UserController@delete');
 
 Route::get('user/view/{id}', 'UserController@view');

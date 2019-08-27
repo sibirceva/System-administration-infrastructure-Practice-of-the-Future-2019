@@ -18,5 +18,7 @@ class VerifyCsrfToken extends BaseVerifier
         'thing/new',
         'type/add',
         'type/new',
+        'user/edit/*',
+        'user/editmail/*',
     ];
 }

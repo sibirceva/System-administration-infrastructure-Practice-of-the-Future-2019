@@ -29,8 +29,8 @@ class CrashController extends Controller
 
     public function delete($id)
     {
-        Crash::findOrFail($id);
-        echo 'Удалить поломку с номером '.$id;
+        Crash::destroy($id);
+        echo '<p>Поломка с номером '.$id.' удалена!</p> <p>[<a href="/crash/view">Вернуться к списку поломок</a> | <a href="/user/view">Вернуться в личный кабинет</a>]</p>';
     }
 
     public function view($id)
@@ -57,19 +57,20 @@ class CrashController extends Controller
                         <th scope="col">Вещь и место</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Время заявления</th>
-                        <th scope="col">Кем закрыта</th>
-                        <th scope="col">Кто закрыл</th>
+                        <th scope="col">Кто закрыта</th>
+                        <th scope="col">Кем закрыл</th>
                         <th scope="col">Действия</th>
                     </thead>
                 </tr>';
         $crashes = Crash::all();
         foreach ($crashes as $crash)
         {
+            $s = ($crash->who_closed != NULL) ? User::find(1)->login /*костыль!*/ : $crash->who_closed;
             echo '<th scope="row">'.$crash->id.'</th>
             <td>'.Type::find(Thing::find($crash->id_of_thing)->type)->name.'<br>'.Thing::find($crash->id_of_thing)->location.'</td>
 			<td> - '.str_replace('; ','<br> - ',$crash->description).'</td>
 			<td>'.$crash->time.'</td>
-			<td>'.User::find($crash->who_closed)->login.'</td>
+			<td>'.$s.'</td> 
 			<td>'.$crash->when_closed.'</td>
             <td><a href="close/'.$crash->id.'">Закрыть</a> | <a href="view/'.$crash->id.'">Просмотреть</a> | <a href="delete/'.$crash->id.'">Удалить</a></td>
             </tr>';
@@ -91,13 +92,15 @@ class CrashController extends Controller
         $thing = Thing::find($id_thing);
         $type = Type::find($thing->type);
         $crashes = explode('; ', $type->often_crashes);
-        for ($i = 0; $i < count($_POST)-1; $i++) { //проверка чекбоксов частых поломок
+        $cpost = array_key_exists('other', $_POST) ? count($_POST)-2 : count($_POST)-1;
+        $count = (count($_POST)>count($crashes)) ? count($crashes)-1 : $cpost;
+        for ($i = 0; $i < $count; $i++) { //проверка чекбоксов частых поломок
             $crash->description .= $crashes[$i];
-            if ($i+1 != count($crashes)) $crash->description .= '; ';
+            if ($i+1 != $count) $crash->description .= '; ';
         }
-        if (count($_POST)-1 > count($crashes)) //проверка чекбокса "другое"
+        if (array_key_exists('other', $_POST)) //проверка чекбокса "другое"
         {
-            $crash->description .= '; ';
+            if(strlen($crash->description)>0) $crash->description.= '; ';
             $crash->description .= $_POST['problem'];
         }
         $crash->save();
@@ -106,8 +109,8 @@ class CrashController extends Controller
         //Отправка письма
         $crash->obj = $type->name;
         $crash->loc = $thing->location;
- 
-        Mail::to("eug-potato@yandex.ru")->send(new CrashNotification($crash));
+        $mail = User::find(1)->email;
+        Mail::to($mail)->send(new CrashNotification($crash));
         echo '<html><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
