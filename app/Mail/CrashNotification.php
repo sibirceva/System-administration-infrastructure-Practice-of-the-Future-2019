@@ -11,16 +11,18 @@ class CrashNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $crash;
+ 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($crash)
     {
-        //
+        $this->crash = $crash;
     }
-
+ 
     /**
      * Build the message.
      *
@@ -28,7 +30,10 @@ class CrashNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name')
-                    ->from('noreply@school.com');
+        return $this->from('sender@example.com')
+                    ->view('mails.demo')
+                    ->text('mails.demo_plain')
+                    ->subject('Внимание! '.$this->crash->obj.'. '.$this->crash->loc.'. '.$this->crash->description);
     }
 }
+
