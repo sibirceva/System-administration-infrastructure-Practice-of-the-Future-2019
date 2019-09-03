@@ -59,7 +59,7 @@ class CrashController extends Controller
                         <th scope="col">Описание</th>
                         <th scope="col">Время заявления</th>
                         <th scope="col">Кто закрыл</th>
-                        <th scope="col">Когда закрыта</th>
+                        <th scope="col">Когда была закрыта</th>
                         <th scope="col">Действия</th>
                     </thead>
                 </tr>';
