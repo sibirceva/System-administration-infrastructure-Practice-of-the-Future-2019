@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <th scope="row">{{ $crash->id }}</th>
-            <td>{{ $crash->obj }}</td>
+            <td>{{ $crash->obj }}<br>{{ $crash->loc }}</td>
 			<td>{{ $crash->description }}</td>
 			<td>{{ $crash->time }}</td>
         </tr>

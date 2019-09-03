@@ -40,7 +40,8 @@ class CrashController extends Controller
 
     public function view_all()
     {
-        echo '<!DOCTYPE HTML>
+        return view('list');
+        /*echo '<!DOCTYPE HTML>
         <html>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <head>
@@ -57,15 +58,15 @@ class CrashController extends Controller
                         <th scope="col">Вещь и место</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Время заявления</th>
-                        <th scope="col">Кто закрыта</th>
-                        <th scope="col">Кем закрыл</th>
+                        <th scope="col">Кто закрыл</th>
+                        <th scope="col">Когда закрыта</th>
                         <th scope="col">Действия</th>
                     </thead>
                 </tr>';
         $crashes = Crash::all();
         foreach ($crashes as $crash)
         {
-            $s = ($crash->who_closed != NULL) ? User::find(1)->login /*костыль!*/ : $crash->who_closed;
+            $s = ($crash->who_closed != NULL) ? User::find(3)->name : $crash->who_closed; //костыль!
             echo '<th scope="row">'.$crash->id.'</th>
             <td>'.Type::find(Thing::find($crash->id_of_thing)->type)->name.'<br>'.Thing::find($crash->id_of_thing)->location.'</td>
 			<td> - '.str_replace('; ','<br> - ',$crash->description).'</td>
@@ -78,7 +79,7 @@ class CrashController extends Controller
         echo '</table>
         </body>
         
-        </html>';
+        </html>';*/
     }
 
     public function add($id_thing)

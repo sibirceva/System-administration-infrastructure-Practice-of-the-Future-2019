@@ -60,3 +60,6 @@ Route::get('user/view/{id}', 'UserController@view');
 Route::get('user/view', 'UserController@view_all');
 
 Route::get('form/{id}', 'ThingController@form');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

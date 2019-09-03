@@ -8,39 +8,39 @@ use App\User;
 
 class UserController extends Controller
 {
-    public function view_all()
-    {
-        /*$user = new User;
-        $user->login = 'admin';
-        $user->save();
+    // public function view_all()
+    // {
+    //     /*$user = new User;
+    //     $user->login = 'admin';
+    //     $user->save();
 
-        $users = User::all();
+    //     $users = User::all();
 
-        foreach ($users as $user) {
-            echo $user->login;
-            echo '<br>';
-        }*/
-        echo '<html>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        </head>
+    //     foreach ($users as $user) {
+    //         echo $user->login;
+    //         echo '<br>';
+    //     }*/
+    //     echo '<html>
+    //         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    //     <head>
+    //         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    //     </head>
         
-        <body>
-        <ul class="list-group">
-            <li class="list-group-item"><a href="/crash/view">Список поломок</a></li>
-            <li class="list-group-item"><a href="/thing/view">Список вещей</a></li>
-            <li class="list-group-item"><a href="/thing/add">Добавить вещь</a></li>
-            <li class="list-group-item"><a href="/type/add">Добавить тип вещи</a></li>
-            <li class="list-group-item"><a href="/user/edit/1">Изменить адрес почты для уведомлений</a></li>
-            <li class="list-group-item"><a href="https://cs3-1v4.vkuseraudio.net/p21/2432be17092fd4.mp3?extra=RfsrEaMR0sZSAogOm_A_iwbtnlpwHCICifbaNMlO6imZKLatm44gebItk1SAEgRx8jWP0SBjAXwUmPFM-tCnP2ykJgSTvbUlJy0qIERlBiNPdQY2sZjT2pQ7opLHH99Mic7LGPZ0y24aRqupNU_TMlpxoeY">Выход</a></li>
-        </ul>';
-    }
+    //     <body>
+    //     <ul class="list-group">
+    //         <li class="list-group-item"><a href="/crash/view">Список поломок</a></li>
+    //         <li class="list-group-item"><a href="/thing/view">Список вещей</a></li>
+    //         <li class="list-group-item"><a href="/thing/add">Добавить вещь</a></li>
+    //         <li class="list-group-item"><a href="/type/add">Добавить тип вещи</a></li>
+    //         <li class="list-group-item"><a href="/user/edit/1">Изменить адрес почты для уведомлений</a></li>
+    //         <li class="list-group-item"><a href="https://cs3-1v4.vkuseraudio.net/p21/2432be17092fd4.mp3?extra=RfsrEaMR0sZSAogOm_A_iwbtnlpwHCICifbaNMlO6imZKLatm44gebItk1SAEgRx8jWP0SBjAXwUmPFM-tCnP2ykJgSTvbUlJy0qIERlBiNPdQY2sZjT2pQ7opLHH99Mic7LGPZ0y24aRqupNU_TMlpxoeY">Выход</a></li>
+    //     </ul>';
+    // }
 
-    public function view($id)
-    {
-        //echo 'Посмотреть пользователя с номером '.$id;
-    }
+    // public function view($id)
+    // {
+    //     echo 'Посмотреть пользователя с номером '.$id;
+    // }
 
     public function edit($id)
     {
