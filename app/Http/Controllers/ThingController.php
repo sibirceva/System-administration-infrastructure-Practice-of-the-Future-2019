@@ -46,44 +46,12 @@ class ThingController extends Controller
         $thing->location = $_POST['location'];
         $thing->type = Type::where('name',$_POST['type'])->first()->id;
         $thing->save();
-        echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <br><br><p class="text-center h2">Новая вещь успешно добавлена!<br>[<a href="/user/view">Вернуться в личный кабинет</a>]</p>';
+        return view('message', ['msg' => 'Новая вещь успешно добавлена!', 'link' => 'Добавить ещё одну вещь', 'link_url' => '/thing/add']);
     }
 
     public function view_all()
     {
-        echo '<!DOCTYPE HTML>
-        <html>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        </head>
-        
-        <body>
-            <p>[<a href="add">Добавить вещь</a> | <a href="/user/view">Вернуться в личный кабинет</a>]</p>
-            <table class="table">
-                <caption><b>Список вещей</b></caption>
-                <tr>
-                    <thead  class="thead-light">
-                        <th scope="col">Номер</th>
-                        <th scope="col">Тип</th>
-                        <th scope="col">Место</th>
-                        <th scope="col">Действия</th>
-                    </thead>
-                </tr>';
-        $things = Thing::all();
-        foreach ($things as $thing)
-        {
-            echo '<th scope="row">'.$thing->id.'</th>
-            <td>'.Type::find($thing->type)->name.'</td>
-			<td>'.$thing->location.'</td>
-            <td><a href="print_poster/'.$thing->id.'">Печать плаката</a> | <a href="edit/'.$thing->id.'">Редактировать</a> | <a href="delete/'.$thing->id.'">Удалить</a></td>
-            </tr>';
-        }
-        echo '</table>
-        </body>
-        
-        </html>';
+        return view('thing_list', [ 'things' => Thing::all()]);
     }
 
     public function print_poster($id)
@@ -101,7 +69,8 @@ class ThingController extends Controller
 
     public function delete($id)
     {
-        echo 'Удалить вещь с номером '.$id;
+        Thing::destroy($id);
+        return view('message', ['msg' => 'Вещь с номером '.$id.' успешно удалена!', 'link' => 'Вернуться к списку вещей', 'link_url' => '/thing/view']);
     }
 
     public function form($id)

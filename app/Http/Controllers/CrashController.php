@@ -21,16 +21,15 @@ class CrashController extends Controller
             $crash->who_closed = 1;
             $crash->when_closed = date('Y-m-d H:i:s');
             $crash->save();
-            echo '<h1>Поломка '.$id.' успешно закрыта.</h1>';
+            return view('message', ['msg' => 'Поломка с номером '.$id.' успешно закрыта!', 'link' => 'Вернуться к списку поломок', 'link_url' => '/crash/view']);
         }
-        else echo '<h1>Поломка уже закрыта!</h1>';
-        echo '<a href="/crash/view">Вернуться к списку поломок</a>';
+        else return view('message', ['msg' => 'Поломка уже была закрыта!', 'link' => 'Вернуться к списку поломок', 'link_url' => '/crash/view']);
     }
 
     public function delete($id)
     {
         Crash::destroy($id);
-        echo '<p>Поломка с номером '.$id.' удалена!</p> <p>[<a href="/crash/view">Вернуться к списку поломок</a> | <a href="/user/view">Вернуться в личный кабинет</a>]</p>';
+        return view('message', ['msg' => 'Поломка с номером '.$id.' успешно удалена!', 'link' => 'Вернуться к списку поломок', 'link_url' => '/crash/view']);
     }
 
     public function view($id)
@@ -40,46 +39,7 @@ class CrashController extends Controller
 
     public function view_all()
     {
-        //return view('list');
-        echo '<!DOCTYPE HTML>
-        <html>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        </head>
-        
-        <body>
-            <p>[<a href="/user/view">Вернуться в личный кабинет</a>]</p>
-            <table class="table">
-                <caption><b>Список поломок</b></caption>
-                <tr>
-                    <thead  class="thead-light">
-                        <th scope="col">Номер</th>
-                        <th scope="col">Вещь и место</th>
-                        <th scope="col">Описание</th>
-                        <th scope="col">Время заявления</th>
-                        <th scope="col">Кто закрыл</th>
-                        <th scope="col">Когда была закрыта</th>
-                        <th scope="col">Действия</th>
-                    </thead>
-                </tr>';
-        $crashes = Crash::all();
-        foreach ($crashes as $crash)
-        {
-            $s = ($crash->who_closed != NULL) ? User::find(3)->name : $crash->who_closed; //костыль!
-            echo '<th scope="row">'.$crash->id.'</th>
-            <td>'.Type::find(Thing::find($crash->id_of_thing)->type)->name.'<br>'.Thing::find($crash->id_of_thing)->location.'</td>
-			<td> - '.str_replace('; ','<br> - ',$crash->description).'</td>
-			<td>'.$crash->time.'</td>
-			<td>'.$s.'</td> 
-			<td>'.$crash->when_closed.'</td>
-            <td><a href="close/'.$crash->id.'">Закрыть</a> | <a href="view/'.$crash->id.'">Просмотреть</a> | <a href="delete/'.$crash->id.'">Удалить</a></td>
-            </tr>';
-        }
-        echo '</table>
-        </body>
-        
-        </html>';
+        return view('crash_list', [ 'crashes' => Crash::all()]);
     }
 
     public function add($id_thing)

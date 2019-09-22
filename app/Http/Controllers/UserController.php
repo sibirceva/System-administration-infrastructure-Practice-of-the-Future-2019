@@ -8,8 +8,13 @@ use App\User;
 
 class UserController extends Controller
 {
-    // public function view_all()
-    // {
+    public function view_all()
+    {
+        $users = User::all();
+
+        foreach ($users as $user) {
+            echo $user->id . ' ' . $user->name . ' ' . $user->email . '<br>';
+        }
     //     /*$user = new User;
     //     $user->login = 'admin';
     //     $user->save();
@@ -35,7 +40,7 @@ class UserController extends Controller
     //         <li class="list-group-item"><a href="/user/edit/1">Изменить адрес почты для уведомлений</a></li>
     //         <li class="list-group-item"><a href="https://cs3-1v4.vkuseraudio.net/p21/2432be17092fd4.mp3?extra=RfsrEaMR0sZSAogOm_A_iwbtnlpwHCICifbaNMlO6imZKLatm44gebItk1SAEgRx8jWP0SBjAXwUmPFM-tCnP2ykJgSTvbUlJy0qIERlBiNPdQY2sZjT2pQ7opLHH99Mic7LGPZ0y24aRqupNU_TMlpxoeY">Выход</a></li>
     //     </ul>';
-    // }
+    }
 
     // public function view($id)
     // {
@@ -67,18 +72,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->email = $_POST['email'];
         $user->save();
-        echo 'Успешно сохранено!';
+        return view('message', ['msg' => 'Ваш e-mail успешно изменён!', 'link' => 'Вернуться в личный кабинет', 'link_url' => '/home']);
     }
 
     public function delete($id)
     {
         User::destroy($id);
-        echo 'Пользователь с номером '.$id.' удалён! <br> Список существующих пользователей: <br>';
-        $users = User::all();
-
-        foreach ($users as $user) {
-            echo $user->id;
-            echo '<br>';
-        }
+        return view('message', ['msg' => 'Пользователь с номером '.$id.' успешно удалён!', 'link' => 'Вернуться к списку пользователей', 'link_url' => '/user/view']);
     }
 }

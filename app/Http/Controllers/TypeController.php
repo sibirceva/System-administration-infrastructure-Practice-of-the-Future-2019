@@ -39,12 +39,12 @@ class TypeController extends Controller
         $type->often_crashes = $_POST['often_crashes'];
         $type->save();
         echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <br><br><p class="text-center h2">Новый тип вещи успешно добавлен!<br>[<a href="/user/view">Вернуться в личный кабинет</a>]</p>';
+        <br><br><p class="text-center h2">Новый тип вещи успешно добавлен!<br>[<a href="/home">Вернуться в личный кабинет</a>]</p>';
     }
 
     public function view_all()
     {
-        echo 'Посмотреть все типы вещей';
+        return view('type_list', [ 'types' => Type::all()]);
     }
 
     public function edit($id)
@@ -54,6 +54,7 @@ class TypeController extends Controller
 
     public function delete($id)
     {
-        echo 'Удалить тип вещи с номером '.$id;
+        Thing::destroy($id);
+        return view('message', ['msg' => 'Тип вещи с номером '.$id.' успешно удалён!', 'link' => 'Вернуться к списку типов вещей', 'link_url' => '/type/view']);
     }
 }
